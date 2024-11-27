@@ -11,13 +11,7 @@ pipeline {
     }
 
     stages {
-        stage('Checkout Code') {
-            steps {
-                // Checkout the code from GitHub
-                git branch: 'main', url: "${GIT_REPO}"
-            }
-        }
-
+      
         stage('Build Docker Image') {
             steps {
                 script {
