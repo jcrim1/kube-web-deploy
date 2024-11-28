@@ -34,14 +34,11 @@ pipeline {
         }
 
         stage('Deploy to Minikube') {
+                          
             steps {
-                script {
-                    // Set Kube Context to Minikube
-                    sh 'kubectl config use-context ${KUBE_CONTEXT}'
-
-                    // Apply Kubernetes YAML files for deployment
-                    sh 'kubectl apply -f dev/deployment.yaml'
-                    sh 'kubectl apply -f dev/service.yaml'
+                withKubeConfig([credentialsId: 'user1', serverUrl: 'https://api.k8s.my-company.com']) {
+                   sh 'kubectl apply -f dev/deployment.yaml'
+                   sh 'kubectl apply -f dev/service.yaml'
                 }
             }
         }
