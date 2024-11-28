@@ -36,7 +36,7 @@ pipeline {
         stage('Deploy to Minikube') {
                           
             steps {
-                withKubeConfig([credentialsId: 'user1', serverUrl: 'https://api.k8s.my-company.com']) {
+                script {
                    sh 'kubectl apply -f dev/deployment.yaml'
                    sh 'kubectl apply -f dev/service.yaml'
                 }
