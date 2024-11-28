@@ -7,6 +7,7 @@ pipeline {
         IMAGE_TAG = "latest"
         DOCKER_CREDENTIALS = credentials('dockerhub-credentials') // Jenkins DockerHub credentials ID
         KUBE_CONTEXT = "minikube"
+        KUBECONFIG = '/root/.kube/config'
         GIT_REPO = "https://github.com/jcrim1/kube-web-deploy.git" // Replace with your GitHub repo URL
     }
 
@@ -39,9 +40,8 @@ pipeline {
                     sh 'kubectl config use-context ${KUBE_CONTEXT}'
 
                     // Apply Kubernetes YAML files for deployment
-                    sh 'kubectl apply -f k8s/deployment.yaml'
-                    sh 'kubectl apply -f k8s/service.yaml'
-                    sh 'kubectl apply -f k8s/ingress.yaml'
+                    sh 'kubectl apply -f dev/deployment.yaml'
+                    sh 'kubectl apply -f dev/service.yaml'
                 }
             }
         }
