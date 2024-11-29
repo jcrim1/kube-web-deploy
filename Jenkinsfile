@@ -47,7 +47,8 @@ pipeline {
             steps {
                 script {
                     // Sync the deployment with ArgoCD
-                    sh 'argocd app sync nodejs-app --auth-token ${ARGOCD_TOKEN} --grpc-web'
+                    sh 'argocd login --username admin --password p7OgD85j4kOZ34KY localhost:8089 --insecure'
+                    sh 'argocd app sync nodejs-app '
                 }
             }
         }
